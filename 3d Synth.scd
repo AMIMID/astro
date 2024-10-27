@@ -13,14 +13,15 @@ Spherical.new(1,(180/4).degrad,(90/2).degrad).z.round(0.000000001)
 	var sig1,sig2,sig3,sig4,sig5,sig6;
 	var v,i,j,k,q;
 	var pitch1, pitch2, pitch3;
-	var pitch, fund=220;
+	var pitch, fund=440;
 	var xyz,xyz_array,axis;
 	var angle=0.degrad;
 
-	xyz=Spherical(1,(180/4).degrad,(90/2).degrad);
+	angle=MouseX.kr(180.neg,180);
+
+	xyz=Spherical(1,angle.degrad,(90/2).degrad);
 	xyz_array=[xyz.x.round(0.000001),xyz.y.round(0.000001),xyz.z.round(0.000001)].postln;
 
-	angle=MouseX.kr(180.neg,180);
 
 v=Quaternion(0,0,0,1);
 
@@ -28,13 +29,13 @@ i=Quaternion(0, xyz_array.[0], 0, 0); j=Quaternion(0, 0, xyz_array.[1], 0); k=Qu
 
 	axis=(i+j+k);
 
-q=((axis*exp(Complex(0,1)*angle).imag)+exp(Complex(0,1)*angle).real);
+q=((axis*exp(Complex(0,1)*90.degrad).imag)+exp(Complex(0,1)*90.degrad).real);
 
 v=q*v*q.conjugate;
 
 	pitch=Cartesian(v.b,v.c,v.d);
 
-	n1=pitch.x.round(1); n2=pitch.y.round(1); n3=pitch.z.round(1);
+	n1=(pitch.x*10).round(1); n2=(pitch.y*10).round(1); n3=(pitch.z*10).round(1);
 
 	pitch1=2.pow(n1/12);
 	pitch2=2.pow(n2/12);
